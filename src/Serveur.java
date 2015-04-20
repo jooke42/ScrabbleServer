@@ -46,30 +46,13 @@ public class Serveur implements Runnable{
 			for (nbJoueurConnecte = 0;nbJoueurConnecte<=nbJoueurAttendu;nbJoueurConnecte++) {
 				Socket joueurSocket =serveur.accept();
 				@SuppressWarnings("unused") //thread lancé dans le contructeur
-				Joueur JoueurThread = new Joueur(joueurSocket);
-				this.joueurs[nbJoueurConnecte]=JoueurThread;
+				Joueur Joueur = new Joueur(joueurSocket, nbJoueurConnecte);
+				this.joueurs[nbJoueurConnecte]=Joueur;
 				System.out.println(nbJoueurConnecte+" / "+nbJoueurAttendu+ " sont connecte(s)");
 			}
 			System.out.println("Tous les joueurs sont connectes , debut de la partie");
 			
-			while(this.plateau.sac.PasVide()){
-				for (int joueuractuel=0;joueuractuel<joueurs.length;joueuractuel++) {
-					Joueur joueur=joueurs[joueuractuel];
-					joueur.startTour();
-					Calendar limite =Calendar.getInstance();
-					limite.add(Calendar.MINUTE, 1);
-					Calendar now =  Calendar.getInstance();
-					
-					while(limite.after(now)){
-						 now =  Calendar.getInstance();
-						
-					}
-					
-						
-					
-				}
-				
-			}
+			new ThreadSession(joueurs);
 				
 				
 				
