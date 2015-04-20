@@ -1,11 +1,16 @@
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 
 public class Sac {
 	
-	private HashMap<Lettre, Integer>   alphabet;
+	private HashMap<Lettre, Integer>   alphabet=new HashMap<Lettre, Integer>();
 	
 	public Sac( ) {
+		
 		this.alphabet.put(new Lettre('A'), 9);
 		this.alphabet.put(new Lettre('B'), 2);
 		this.alphabet.put(new Lettre('C'), 2);
@@ -74,4 +79,17 @@ public void ajouterLettre(char lettre) {
 	public boolean PasVide() {
 		return !this.alphabet.isEmpty();
 	}
+	
+	 public  Lettre randomGen() throws PlusLettreSac
+	    {
+	            
+		 Random       random    = new Random();
+		 List<Lettre> keys      = new ArrayList<Lettre>(this.alphabet.keySet());
+		 Lettre       randomKey = keys.get( random.nextInt(keys.size()) );
+		 	enleverLettre(randomKey.getLettre());
+	             return randomKey;
+	            
+
+	    }
+
 }
